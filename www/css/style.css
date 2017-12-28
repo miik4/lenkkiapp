@@ -1,0 +1,16 @@
+.map{
+    width:100%;
+    height:50%;
+}
+.lenkintiedot{
+    text-align: center;
+}
+.pikkuteksti{
+    text-align: center;
+    font-size: 0.8em;
+}
+
+.isoteksti{
+    text-align: center;
+    font-size: 1.2em;
+}

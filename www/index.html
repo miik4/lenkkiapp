@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html ng-app="lenkkiApp">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
+        <link rel="stylesheet" href="https://openlayers.org/en/v3.20.1/css/ol.css" type="text/css">
+        <link rel="stylesheet" type="text/css" href="css/ionic.min.css">
+        <link rel="stylesheet" type="text/css" href="css/style.css">
+        <script src="https://openlayers.org/en/v3.20.1/build/ol.js" type="text/javascript"></script>
+        <script type="text/javascript" src="js/ionic.bundle.min.js"></script>
+        <script type="text/javascript" src="js/ng-cordova.min.js"></script>
+        <script type="text/javascript" src="cordova.js"></script>
+        <script type="text/javascript" src="js/app.js"></script>
+        <title>Lenkki App</title>
+    </head>
+    <body ng-controller="lenkkiAppCtrl">
+        <ion-tabs class="tabs-stable tabs-icon-top">
+
+            <ion-tab title="Aloita" icon-on="ion-android-bicycle" icon-off="ion-android-bicycle">
+
+                <ion-header-bar align-title="center" class="bar-dark">
+                    <h1 class="title">Lenkkeilijän App</h1>
+                </ion-header-bar>
+                <ion-content class="has-header padding">
+                
+                    <button class="button button-dark button-full" ng-click="AloitaLopetaLenkki()">{{LenkkiTeksti}}</button>
+                    
+                    <div class="row">
+                        <div class="col lenkintiedot">
+                            <span class="pikkuteksti">Nopeus</span><br/>
+                            <span class="isoteksti">{{nopeus}}km/h</span>
+                        </div>
+                        <div class="col lenkintiedot">
+                            <span class="pikkuteksti">Lenkin pituus</span><br/>
+                            <span class="isoteksti">{{lenkinPituus}}km</span>
+                        </div>
+                        <div class="col lenkintiedot">
+                            <span class="pikkuteksti">Aika</span><br/>
+                            <span class="isoteksti">
+                                <span ng-show="tunnit < 10">0</span>{{tunnit}}:<span ng-show="minuutit < 10">0</span>{{minuutit}}:<span ng-show="sekunnit < 10">0</span>{{sekunnit}}</span>
+                        </div>
+                    </div>
+
+                    <h3>Kartta</h3>
+                    <div id="kartta" class="map"></div>
+
+                </ion-content>
+            </ion-tab>
+                
+            <ion-tab title="Tallennetut lenkit" icon-on="ion-android-favorite" icon-off="ion-android-favorite-outline">
+                <ion-header-bar align-title="center" class="bar-dark">
+                    <h1 class="title">Lenkkeilijän App</h1>
+                </ion-header-bar>
+                
+                <ion-content class="has-header padding">
+                    
+                    <div class="card" ng-repeat="tulos in tulokset">
+                        <div class="item item-divider">
+                            {{tulos.lenkin_pvm | date:"dd.MM.yyyy ' klo:'hh:mm"}}
+                        </div>
+                        <div class="item item-text-wrap">
+                            <b>{{tulos.lenkin_nimi}}</b><br/>
+                            Lenkin pituus: {{tulos.lenkin_pituus}}km<br/>
+                            Aika: {{tulos.lenkin_aika}}<br/>
+                            Max nopeus: {{tulos.lenkin_max_nopeus}}km/h<br/>
+                        </div>
+                    </div>
+                    
+                </ion-content>
+                
+            </ion-tab>
+        </ion-tabs>
+    </body>
+</html>
